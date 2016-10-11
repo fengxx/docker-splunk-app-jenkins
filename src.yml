@@ -1,0 +1,17 @@
+version: '2'
+services:
+  splunk:
+    build: splunk
+    hostname: splunk-app-for-jenkins
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+    ports:
+      - "8000:8000"
+      - "8088:8088"
+  jenkins:
+    build: jenkins-2x
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    depends_on:
+      - "splunk"

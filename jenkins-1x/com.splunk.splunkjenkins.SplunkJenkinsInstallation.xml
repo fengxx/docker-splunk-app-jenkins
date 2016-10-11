@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.splunk.splunkjenkins.SplunkJenkinsInstallation plugin="splunk-devops@1.0">
+  <enabled>true</enabled>
+  <host>splunk</host>
+  <token>DEADC0DE-BAD2-0000-0000-000000000000</token>
+  <useSSL>true</useSSL>
+  <port>8088</port>
+  <maxEventsBatchSize>262144</maxEventsBatchSize>
+  <retriesOnError>3</retriesOnError>
+  <rawEventEnabled>true</rawEventEnabled>
+  <metaDataConfig>source=jenkins
+host=jenkins-master-1
+index=jenkins_statistics
+build_report.index=jenkins
+file.index=jenkins_artifact
+console_log.index=jenkins_console
+
+</metaDataConfig>
+  <scriptContent>//send job metadata and junit reports with page size set to 50 (each event contains max 50 test cases)
+def results = getJunitReport(50)
+def buildEvent = getBuildEvent()
+results.eachWithIndex { junitResult, idx -&gt;
+    Map pagedEvent = buildEvent + [&quot;testsuite&quot;: junitResult, &quot;page_num&quot;: idx + 1]
+    send(pagedEvent)
+}
+
+//send all logs from workspace to splunk, with each file size limits to 10MB
+archive(&quot;**/*.log&quot;, null, false, &quot;10MB&quot;)</scriptContent>
+  <splunkAppUrl>http://127.0.0.1:8000/en-US/app/splunk_app_jenkins/</splunkAppUrl>
+</com.splunk.splunkjenkins.SplunkJenkinsInstallation>
