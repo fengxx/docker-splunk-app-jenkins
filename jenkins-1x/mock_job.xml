@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>name</name>
+          <description></description>
+          <defaultValue>alice</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+seconds=&quot;10#`date &apos;+%S&apos;`&quot;
+let sec=$seconds
+let failures=0
+
+if [ $sec -lt 20 ] ; then
+   failures=1
+   read -r -d &apos;&apos; message &lt;&lt;&apos;endofline&apos;
+&lt;failure message=&quot;access denied&quot;&gt;
+&lt;![CDATA[
+Java.lang.reflect.InvocationTargetException
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.kohsuke.stapler.Function$InstanceFunction.invoke(Function.java:320)
+at org.kohsuke.stapler.Function.bindAndInvoke(Function.java:163)
+at org.kohsuke.stapler.Function.bindAndInvokeAndServeResponse(Function.java:96)
+at org.kohsuke.stapler.MetaClass$1.doDispatch(MetaClass.java:124)
+at org.kohsuke.stapler.NameBasedDispatcher.dispatch(NameBasedDispatcher.java:58)
+at org.kohsuke.stapler.Stapler.tryInvoke(Stapler.java:746)
+at org.kohsuke.stapler.Stapler.invoke(Stapler.java:876)
+at org.kohsuke.stapler.MetaClass$5.doDispatch(MetaClass.java:233)
+at org.kohsuke.stapler.NameBasedDispatcher.dispatch(NameBasedDispatcher.java:58)
+at org.kohsuke.stapler.Stapler.tryInvoke(Stapler.java:746)
+at org.kohsuke.stapler.Stapler.invoke(Stapler.java:876)
+at org.kohsuke.stapler.MetaClass$5.doDispatch(MetaClass.java:233)
+at org.kohsuke.stapler.NameBasedDispatcher.dispatch(NameBasedDispatcher.java:58)
+at org.kohsuke.stapler.Stapler.tryInvoke(Stapler.java:746)
+at org.kohsuke.stapler.Stapler.invoke(Stapler.java:876)
+at org.kohsuke.stapler.Stapler.invoke(Stapler.java:649)
+at org.kohsuke.stapler.Stapler.service(Stapler.java:238)
+at javax.servlet.http.HttpServlet.service(HttpServlet.java:848)
+at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:686)
+at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1494)
+at hudson.util.PluginServletFilter$1.doFilter(PluginServletFilter.java:135)
+at hudson.util.PluginServletFilter.doFilter(PluginServletFilter.java:126)
+at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1482)
+at hudson.security.csrf.CrumbFilter.doFilter(CrumbFilter.java:49)
+ ]]&gt;
+&lt;/failure&gt;
+endofline
+else
+	message=&quot;&quot;
+fi
+
+
+cat &gt;test-result.xml &lt;&lt;EOF
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;testsuite errors=&quot;0&quot; failures=&quot;${failures}&quot; name=&quot;${NAME}&quot; skips=&quot;1&quot; tests=&quot;1&quot; time=&quot;${sec}&quot;&gt;
+&lt;testcase classname=&quot;unit1.mock_test&quot; file=&quot;mock_1.py&quot; line=&quot;201&quot; name=&quot;unit1&quot; time=&quot;${sec}&quot;&gt;
+${message}
+&lt;/testcase&gt;
+&lt;/testsuite&gt;
+EOF</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.2-beta-4">
+      <testResults>test-result.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+      <healthScaleFactor>1.0</healthScaleFactor>
+    </hudson.tasks.junit.JUnitResultArchiver>
+  </publishers>
+  <buildWrappers/>
+</project>
