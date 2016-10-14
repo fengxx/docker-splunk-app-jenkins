@@ -5,7 +5,7 @@ LABEL description = "The Splunk App for Jenkins image"
 MAINTAINER Ted <txiao@splunk.com>
 
 USER splunk
-ENV package splunk-app-for-jenkins_101.tgz
+ENV package splunk-app-for-jenkins.tgz
 ENV SPLUNK_BACKUP_DEFAULT_ETC /var/opt/splunk
 
 COPY ${package} app.md5 /tmp/
