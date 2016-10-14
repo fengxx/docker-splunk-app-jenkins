@@ -1,9 +1,7 @@
-### Upgrade
- 1. download latest [Splunk App For Jenkins](https://splunkbase.splunk.com/app/3332/) and put it in the same folder of Dockerfile  
-2. update Dockerfile to use latest package  
-   `ENV package splunk-app-for-jenkins_101.tgz`  
-3. update app.md5 with latest package and checksum 
-   `91e07d02f41e91254a8c46343751391a splunk-app-for-jenkins_101.tgz`  
+### Upgrade Splunk App For Jenkins
+ 1. download latest [Splunk App For Jenkins](https://splunkbase.splunk.com/app/3332/) and put it in the same folder of Dockerfile   
+ 2. update app.md5 with latest package and checksum , e.g.
+   `8f198c209bf0ee5343958ce4d72688eb splunk-app-for-jenkins.tgz`
 
 ### Build and Run
 
