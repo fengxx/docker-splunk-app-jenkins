@@ -8,6 +8,7 @@ services:
     ports:
       - "8000:8000"
       - "8088:8088"
+      - "8089:8089"
   jenkins:
     image: fengxx/jenkins-1x
     #image: fengxx/jenkins-2x
