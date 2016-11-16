@@ -6,9 +6,9 @@ services:
     environment:
       SPLUNK_START_ARGS: --accept-license
     ports:
-      - "8000:8000"
-      - "8088:8088"
-      - "8089:8089"
+      - "18000:8000"
+      - "18088:8088"
+      - "18089:8089"
   jenkins:
     image: fengxx/jenkins-1x
     #image: fengxx/jenkins-2x

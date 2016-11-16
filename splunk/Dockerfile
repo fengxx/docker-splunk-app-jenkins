@@ -12,7 +12,6 @@ COPY ${package} app.md5 /tmp/
 RUN cd /tmp && md5sum -c app.md5
 #deploy HTTP Event Collector token
 COPY inputs.conf ${SPLUNK_BACKUP_DEFAULT_ETC}/etc/apps/splunk_httpinput/local/
-COPY server.conf  ${SPLUNK_BACKUP_DEFAULT_ETC}/etc/system/local/
 #deploy splunk-app-for-jenkins
 RUN tar -xzf /tmp/${package} -C ${SPLUNK_BACKUP_DEFAULT_ETC}/etc/apps/
 

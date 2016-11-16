@@ -12,4 +12,4 @@ else
 	exit -1
 fi
 docker-compose up
-echo Access http://localhost:8080 for Jenkins, and http://localhost:8000 for Splunk
+echo Access http://localhost:8080 for Jenkins, and http://localhost:18000 for Splunk

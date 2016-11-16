@@ -26,5 +26,5 @@ results.eachWithIndex { junitResult, idx -&gt;
 
 //send all logs from workspace to splunk, with each file size limits to 10MB
 archive(&quot;**/*.log&quot;, null, false, &quot;10MB&quot;)</scriptContent>
-  <splunkAppUrl>http://127.0.0.1:8000/en-US/app/splunk_app_jenkins/</splunkAppUrl>
+  <splunkAppUrl>http://127.0.0.1:18000/en-US/app/splunk_app_jenkins/</splunkAppUrl>
 </com.splunk.splunkjenkins.SplunkJenkinsInstallation>
