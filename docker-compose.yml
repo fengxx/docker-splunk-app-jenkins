@@ -4,7 +4,7 @@ services:
     hostname: splunk-app-for-jenkins
     image: fengxx/splunk-app-for-jenkins
     environment:
-      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_START_ARGS: --accept-license --no-prompt --answer-yes
     ports:
       - "18000:8000"
       - "18088:8088"
