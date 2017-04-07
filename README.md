@@ -1,4 +1,4 @@
-### A simple docker images used for demo [Splunk Plugin for Jenkins](wiki.jenkins-ci.org/display/JENKINS/Splunk+Plugin+for+Jenkins)
+### A simple docker images used for demo [Splunk Plugin for Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Splunk+Plugin+for+Jenkins)
 
 ### Run
 	curl -s -L https://raw.githubusercontent.com/fengxx/docker-splunk-app-jenkins/master/demo.sh | sh
